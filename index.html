@@ -3,68 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAUS MULTIVERSE - ULTIMATE</title>
+    <title>DAUS MULTIVERSE</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="world-day">
+<body class="day-theme">
 
-    <div id="loading-overlay">
-        <div class="loader-card">
-            <h1 id="status-text">Mempersiapkan Dimensi...</h1>
-            <div class="progress-container">
-                <div id="progress-bar"></div>
-            </div>
-            
-            <div id="entry-form" class="hidden">
-                <input type="text" id="inputNama" placeholder="Nama panggilan lu..." autocomplete="off">
-                <button id="btnMulai">MASUK DUNIA ABSURD</button>
-            </div>
+    <div id="login-page">
+        <div class="glass-card">
+            <h1>WARUNG DAUS ☕</h1>
+            <p>Langsung masuk aja, gak pake antre.</p>
+            <input type="text" id="playerName" placeholder="Nama lu siapa..." autofocus>
+            <button id="entryBtn">GAS MASUK!</button>
         </div>
     </div>
 
-    <main id="game-world" class="hidden">
+    <div id="world" class="hidden">
         <div id="sky">
-            <div id="sun-moon">☀️</div>
-            <div id="event-sky"></div>
+            <div id="sun">☀️</div>
+            <div id="sky-event"></div>
         </div>
 
-        <div id="ground">
-            <div class="mountain"></div>
-            
-            <div class="entity" id="daus" onclick="interact('daus')">
-                <div class="sprite">👨‍🔧</div>
-                <div class="warung">🏠</div>
+        <div id="land">
+            <div class="npc" onclick="openChat('daus')" id="npc-daus">
+                <div class="msg-pop">Oit!</div>
+                <span>👨‍🔧</span>
+                <div class="warung-mini">🏠</div>
             </div>
 
-            <div class="entity" id="ayam" onclick="interact('ayam')">🐓</div>
-            <div class="entity" id="buaya" onclick="interact('buaya')">🐊</div>
-            <div class="entity" id="pohon" onclick="interact('pohon')">🌳</div>
+            <div class="npc" onclick="openChat('ayam')" id="npc-ayam">🐓</div>
+            <div class="npc" onclick="openChat('buaya')" id="npc-buaya">🐊</div>
         </div>
 
-        <div id="road">
-            <div id="motor-supra">🛵💨</div>
-            <div id="event-ground"></div>
+        <div id="ui-overlay">
+            <b>PLAYER: <span id="user-display">?</span></b>
         </div>
+    </div>
 
-        <div id="ui-top">
-            <span>PLAYER: <b id="ui-nama">...</b></span> | 
-            <span>TRUST: <b id="ui-trust">50</b></span>
-        </div>
-    </main>
-
-    <div id="chat-window" class="hidden">
-        <div class="chat-header">
-            <span id="chat-title">OBJEK</span>
+    <div id="chat-box" class="hidden">
+        <div class="chat-head">
+            <span id="chat-with">DAUS</span>
             <button onclick="closeChat()">✖</button>
         </div>
-        <div id="chat-logs"></div>
-        <div class="chat-input">
-            <input type="text" id="userQuery" placeholder="Ngomong apa lu...">
-            <button id="btnSend">GAS</button>
+        <div id="chat-body"></div>
+        <div class="chat-foot">
+            <input type="text" id="chatInput" placeholder="Ketik...">
+            <button id="sendBtn">KIRIM</button>
         </div>
     </div>
 
-    <div id="kiss-fx" class="hidden">💋</div>
+    <div id="fx-kiss" class="hidden">💋</div>
 
     <script src="script.js"></script>
 </body>
