@@ -1,41 +1,78 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>Furina — Art Intelligence</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAUS MULTIVERSE | SENSASI INDO</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="day-theme">
 
-<div class="score">Score: <span id="score">0</span></div>
+    <div class="scenery">
+        <div class="clouds">
+            <div class="cloud c1">☁️</div>
+            <div class="cloud c2">☁️</div>
+            <div class="cloud c3">☁️</div>
+        </div>
 
-<main class="wrap">
-  <section class="card">
-    <img class="hero" src="https://i.imgur.com/8zQZQZQ.png" alt="Furina">
-    <h2>Furina</h2>
+        <div class="birds">
+            <div class="bird b1">🐦</div>
+            <div class="bird b2">🐦</div>
+        </div>
 
-    <div id="chat" class="chat">
-      <div class="ai">
-        “Aku tidak mencari perhatian. Aku menilai ketepatan.”
-      </div>
+        <div class="mountains">
+            <div class="mountain"></div>
+            <div class="mountain m2"></div>
+        </div>
+
+        <div class="road">
+            <div class="road-line"></div>
+            
+            <div class="vehicle motor-supra">🛵💨 <small>Supra Bapak</small></div>
+            <div class="vehicle angkot">🚐 <small>05 Cicadas</small></div>
+            <div class="vehicle truck-oleng">🚚 <small>Mama Nyitnyit</small></div>
+        </div>
+
+        <div class="peddler">🍜 <small>Bakso</small></div>
     </div>
 
-    <input id="input" placeholder="Pilih kata dengan sadar…" autocomplete="off">
-  </section>
+    <main id="app">
+        <header>
+            <div class="daus-profile">
+                <div class="avatar">👨‍🔧</div>
+                <div class="info">
+                    <h1>MAS DAUS</h1>
+                    <span id="status">Online | Lagi Ngopi</span>
+                </div>
+            </div>
+            <div id="clock">00:00:00</div>
+        </header>
 
-  <section class="leaderboard">
-    <h3>🏆 Global Scoreboard</h3>
-    <ol id="board"></ol>
-  </section>
+        <section id="chat-container">
+            <div class="bubble ai">
+                Woi! Selamat datang di Multiverse gue. Di sini mah bebas, mau curhat oke, mau tanya tebak-tebakan mangga. Asal jangan pinjem seratus!
+            </div>
+        </section>
 
-  <footer class="credit">by Firdaus Hidayatullah</footer>
-</main>
+        <footer>
+            <div class="input-group">
+                <input type="text" id="userInput" placeholder="Ketik di sini, Bosku..." autocomplete="off">
+                <button id="sendBtn">GAS!</button>
+            </div>
+            <p class="credit">© 2026 Bengkel Logika Daus - Jawa Barat</p>
+        </footer>
+    </main>
 
-<!-- Firebase (Frontend only, aman untuk GitHub Pages) -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <div id="ending-screen" class="hidden">
+        <div class="modal-content">
+            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Daus" alt="Daus">
+            <h2>LU ASYIK BANGET!</h2>
+            <p>Berhubung lu udah bikin gue seneng, nih kode rahasia buat beli Nasi Padang:</p>
+            <div class="flag-box" id="flagValue"></div>
+            <button onclick="location.reload()">MAIN LAGI</button>
+        </div>
+    </div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
