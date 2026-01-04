@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAUS MULTIVERSE: CHAOS WARUNG SIMULATOR</title>
+    <title>DAUS MULTIVERSE: CHAOS EDITION</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="world-day">
@@ -11,64 +11,48 @@
     <div id="welcome-screen">
         <div class="welcome-box">
             <h1>SAMPURASUN! ☕</h1>
-            <p>Selamat datang di dimensi Mas Daus. Di sini semua benda punya perasaan.</p>
+            <p>Selamat datang di dimensi Mas Daus. Klik apa aja buat ngobrol.</p>
             <div class="tutorial">
-                <p><b>Cara Main:</b></p>
                 <ul>
-                    <li>Klik benda/orang buat interaksi.</li>
-                    <li>Jendela chat bisa ditutup-buka tanpa hapus chat.</li>
-                    <li>Hati-hati, kiamat bisa dateng kapan aja.</li>
+                    <li>🗨️ Klik objek buat buka/tutup chat.</li>
+                    <li>💥 Hati-hati ledakan mendadak.</li>
+                    <li>💋 Jangan kasar kalau gak mau dicium.</li>
                 </ul>
             </div>
-            <input type="text" id="inputNama" placeholder="Nama panggilan lu...">
-            <button onclick="mulaiDunia()">MASUK DIMENSI ABSURD</button>
+            <input type="text" id="inputNama" placeholder="Nama lu siapa...">
+            <button id="btnMulai">MASUK DIMENSI ABSURD</button>
         </div>
     </div>
 
     <div id="game-container" class="hidden">
-        
         <div id="sky">
             <div id="sun-moon">☀️</div>
-            <div class="cloud-layer">☁️ ☁️</div>
-            
             <div id="kejadian-langit"></div>
         </div>
 
         <div id="landscape">
             <div class="mountain"></div>
-            <div class="sawah"></div>
-
             <div class="entitas" id="ent-daus" onclick="bukaObrolan('daus')">
-                <div class="label">Mas Daus (Lagi Ngopi)</div>
+                <div class="label">Mas Daus</div>
                 <div class="sprite">👨‍🔧</div>
                 <div class="warung-fisik">🏠</div>
             </div>
-
             <div class="entitas" id="ent-ayam" onclick="bukaObrolan('ayam')">
                 <div class="sprite">🐓</div>
             </div>
-
             <div class="entitas" id="ent-buaya" onclick="bukaObrolan('buaya')">
                 <div class="sprite">🐊</div>
             </div>
-
-            <div class="entitas" id="ent-siput" onclick="bukaObrolan('siput')">
-                <div class="sprite">🐌</div>
-            </div>
-
-            <div class="entitas" id="ent-ember" onclick="bukaObrolan('ember')">
-                <div class="sprite">🪣</div>
-            </div>
-
             <div class="entitas" id="ent-pohon" onclick="bukaObrolan('pohon')">
                 <div class="sprite">🌳</div>
+            </div>
+            <div class="entitas" id="ent-ember" onclick="bukaObrolan('ember')">
+                <div class="sprite">🪣</div>
             </div>
         </div>
 
         <div id="road">
-            <div class="zebra-cross"></div>
             <div id="supra-bapak">🛵💨</div>
-            
             <div id="kejadian-darat"></div>
         </div>
 
@@ -76,35 +60,21 @@
             <span>PLAYER: <b id="display-nama">...</b></span> | 
             <span>TRUST: <b id="display-trust">50</b> RP</span>
         </div>
-
     </div>
 
     <div id="floating-chat" class="hidden">
         <div class="chat-header">
-            <div class="target-info">
-                <span id="target-icon">❓</span>
-                <span id="target-name">Objek</span>
-            </div>
-            <button class="btn-close" onclick="tutupObrolan()">✖</button>
+            <span id="target-info">❓ Objek</span>
+            <button onclick="tutupObrolan()">✖</button>
         </div>
-        <div id="chat-content">
-            </div>
+        <div id="chat-content"></div>
         <div class="chat-footer">
-            <input type="text" id="msgInput" placeholder="Ketik sesuatu...">
+            <input type="text" id="msgInput" placeholder="Ketik...">
             <button id="btnGas">GAS!</button>
         </div>
     </div>
 
     <div id="kiss-overlay" class="hidden">💋</div>
-
-    <div id="modal-ending" class="hidden">
-        <div class="ending-box">
-            <h2>LU EMANG GILA! 🏆</h2>
-            <p>Daus bangga sama lu. Ini kode buat ambil Nasi Padang di surga:</p>
-            <div class="flag-container" id="flag-text"></div>
-            <button onclick="resetDunia()">MAIN LAGI</button>
-        </div>
-    </div>
-
+    <script src="script.js"></script>
 </body>
 </html>
