@@ -1,0 +1,68 @@
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(1200px at top,#1e293b,#020617);
+  color:#e5e7eb;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+}
+.wrap{
+  max-width:420px;
+  margin:auto;
+  padding:16px;
+}
+.card{
+  background:rgba(255,255,255,.06);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+.hero{
+  width:100%;
+  border-radius:14px;
+}
+h2{
+  text-align:center;
+  margin:10px 0;
+  letter-spacing:.5px;
+}
+.chat{
+  height:260px;
+  overflow:auto;
+  font-size:14px;
+  line-height:1.5;
+}
+.chat .ai{color:#fbcfe8;margin:8px 0}
+.chat .user{color:#7dd3fc;margin:8px 0;text-align:right}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  outline:none;
+  margin-top:8px;
+  background:#020617;
+  color:#e5e7eb;
+}
+.score{
+  position:fixed;
+  top:10px;
+  right:12px;
+  background:#020617cc;
+  padding:8px 14px;
+  border-radius:999px;
+  font-weight:600;
+}
+.leaderboard{
+  margin-top:14px;
+  background:rgba(255,255,255,.04);
+  border-radius:14px;
+  padding:12px;
+  font-size:13px;
+}
+.leaderboard h3{margin:0 0 6px 0}
+.credit{
+  text-align:center;
+  opacity:.6;
+  font-size:12px;
+  margin-top:10px;
+}
