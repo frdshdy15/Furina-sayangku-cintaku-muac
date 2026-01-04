@@ -1,105 +1,83 @@
-let namaUser = "";
-let trust = 0;
-let isEnding = false;
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let width, height, field;
+let particles = [];
+const particleCount = 2500; // Jumlah gila untuk performa tinggi
 
-// 1. Start Game
-function startGame() {
-    const input = document.getElementById('input-nama');
-    if (input.value.length < 2) return alert("Nama jangan dikosongin bos!");
-    
-    namaUser = input.value;
-    document.getElementById('screen-welcome').classList.add('hidden');
-    document.getElementById('screen-game').classList.remove('hidden');
-    
-    setTimeout(() => {
-        appendChat(`Oi ${namaUser}! Akhirnya dateng juga. Jangan cuma diri disitu, masuk!`, 'daus');
-    }, 800);
-}
-
-// 2. Update Jam & Mood
-setInterval(() => {
-    const now = new Date();
-    document.getElementById('clock-display').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-    
-    const bg = document.getElementById('body-bg');
-    const hr = now.getHours();
-    if (hr >= 5 && hr < 11) bg.style.background = "var(--pagi)";
-    else if (hr >= 11 && hr < 18) bg.style.background = "var(--siang)";
-    else bg.style.background = "var(--malam)";
-}, 1000);
-
-// 3. Chat Logic
-document.getElementById('btn-kirim').addEventListener('click', () => {
-    const input = document.getElementById('user-input');
-    const msg = input.value.trim();
-    if (!msg) return;
-
-    appendChat(msg, 'user');
-    input.value = "";
-
-    setTimeout(() => {
-        const respon = hitungAI(msg);
-        appendChat(respon, 'daus');
-    }, 1000);
-});
-
-function hitungAI(msg) {
-    const m = msg.toLowerCase();
-    
-    // Logic Trust
-    if (m.includes("halo") || m.includes("apa kabar")) {
-        trust += 10;
-        return `Kabar baik, ${namaUser}. Tumben lu nanya kabar, biasanya langsung minta hotspot.`;
+class Particle {
+    constructor(x, y) {
+        this.pos = { x, y };
+        this.vel = { x: 0, y: 0 };
+        this.acc = { x: 0, y: 0 };
+        this.maxSpeed = 2;
+        this.h = Math.random() * 360;
     }
 
-    if (m.includes("daus ganteng") || m.includes("keren")) {
-        trust += 20;
-        return "Waduh, tau aja lu. Emang dari lahir sih.";
-    }
+    update() {
+        // Algoritma Flow Field berdasarkan Perlin Noise (Simulasi)
+        let angle = (Math.sin(this.pos.x * 0.005) + Math.cos(this.pos.y * 0.005)) * Math.PI * 2;
+        this.acc.x = Math.cos(angle) * 0.1;
+        this.acc.y = Math.sin(angle) * 0.1;
 
-    if (m.includes("mie ayam") || m.includes("duit")) {
-        if (trust < 80) {
-            trust -= 5;
-            return "Duit mulu pikiran lu. Usaha dong!";
-        } else {
-            return "Karena lu udah gue anggep sodara, nih FLAG: 'minta uang ke daus buat beli mie ayam'. Gas beli!";
+        this.vel.x += this.acc.x;
+        this.vel.y += this.acc.y;
+        
+        // Limit speed
+        const speed = Math.sqrt(this.vel.x**2 + this.vel.y**2);
+        if (speed > this.maxSpeed) {
+            this.vel.x = (this.vel.x / speed) * this.maxSpeed;
+            this.vel.y = (this.vel.y / speed) * this.maxSpeed;
         }
+
+        this.pos.x += this.vel.x;
+        this.pos.y += this.vel.y;
+
+        if (this.pos.x > width) this.pos.x = 0;
+        if (this.pos.x < 0) this.pos.x = width;
+        if (this.pos.y > height) this.pos.y = 0;
+        if (this.pos.y < 0) this.pos.y = height;
     }
 
-    // Absurd Event Trigger (15% chance)
-    if (Math.random() < 0.15) {
-        triggerAbsurd();
-        return "EH BUSYET! Lu denger suara dentuman barusan gak??";
+    draw() {
+        // Dinamika warna berdasarkan waktu & posisi (Realtime jam)
+        const hour = new Date().getHours();
+        ctx.strokeStyle = `hsla(${(this.h + hour * 10) % 360}, 80%, 50%, 0.15)`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(this.pos.x, this.pos.y);
+        ctx.lineTo(this.pos.x - this.vel.x * 5, this.pos.y - this.vel.y * 5);
+        ctx.stroke();
     }
-
-    return "Terus? Cerita lagi lah.";
 }
 
-function triggerAbsurd() {
-    const overlay = document.getElementById('absurd-overlay');
-    const icons = ['🐊', '🍗', '💥', '🚲', '👻'];
-    const pick = icons[Math.floor(Math.random() * icons.length)];
-    
-    const div = document.createElement('div');
-    div.className = 'jump';
-    div.innerText = pick;
-    overlay.appendChild(div);
-
-    // Getar HP (Haptic Feedback)
-    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-    document.body.style.filter = "invert(1)";
-
-    setTimeout(() => {
-        div.remove();
-        document.body.style.filter = "none";
-    }, 1500);
+function setup() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle(Math.random() * width, Math.random() * height));
+    }
+    ctx.backgroundColor = 'black';
+    ctx.fillRect(0, 0, width, height);
 }
 
-function appendChat(txt, sender) {
-    const box = document.getElementById('chat-box');
-    const div = document.createElement('div');
-    div.className = `msg ${sender}`;
-    div.innerText = txt;
-    box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
+function animate() {
+    // Memberikan efek "Ghosting" alam semesta
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
+    ctx.fillRect(0, 0, width, height);
+
+    // Update UI Stats
+    document.getElementById('coord').innerText = 
+        `${Math.floor(particles[0].pos.x)}, ${Math.floor(particles[0].pos.y)}, ${new Date().getMilliseconds()}`;
+
+    particles.forEach(p => {
+        p.update();
+        p.draw();
+    });
+
+    requestAnimationFrame(animate);
 }
+
+window.addEventListener('resize', setup);
+setup();
+animate();
