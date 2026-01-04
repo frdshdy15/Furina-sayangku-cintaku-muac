@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Furina — Art Intelligence</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="score">Score: <span id="score">0</span></div>
+
+<main class="wrap">
+  <section class="card">
+    <img class="hero" src="https://i.imgur.com/8zQZQZQ.png" alt="Furina">
+    <h2>Furina</h2>
+
+    <div id="chat" class="chat">
+      <div class="ai">
+        “Aku tidak mencari perhatian. Aku menilai ketepatan.”
+      </div>
+    </div>
+
+    <input id="input" placeholder="Pilih kata dengan sadar…" autocomplete="off">
+  </section>
+
+  <section class="leaderboard">
+    <h3>🏆 Global Scoreboard</h3>
+    <ol id="board"></ol>
+  </section>
+
+  <footer class="credit">by Firdaus Hidayatullah</footer>
+</main>
+
+<!-- Firebase (Frontend only, aman untuk GitHub Pages) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>
